@@ -4,13 +4,11 @@ export default {
   data() {
     return {
       nombre: '',
-      // un estado que cambia para disparar renders "no relacionados"
       contador: 0
     }
   },
   computed: {
     mensajeBienvenida() {
-      // Computada: depende solo de 'nombre'
       const base = this.nombre?.trim() || 'visitante'
       return `¡Bienvenido/a, ${base}!`
     },
@@ -23,12 +21,10 @@ export default {
   },
   methods: {
     mensajeBienvenidaMetodo() {
-      // hace lo mismo pero como método (sin cache)
       const base = this.nombre?.trim() || 'visitante'
       return `¡Bienvenido/a, ${base}!`
     },
     mensajeCostosoMetodo() {
-      // la misma operación "costosa" pero se ejecuta en cada render/uso
       let s = 0
       for (let i = 0; i < 20000; i++) s += i
       return `${this.mensajeBienvenidaMetodo()} (método recalculado: ${s})`
@@ -53,7 +49,6 @@ export default {
       <div class="card">
         <h3>Usando <span class="badge">computed</span></h3>
         <p><strong>{{ mensajeBienvenida }}</strong></p>
-        <!-- usamos la misma computada varias veces (se sirve de la caché) -->
         <p class="small">Re-uso 1: {{ mensajeBienvenida }}</p>
         <p class="small">Re-uso 2: {{ mensajeBienvenida }}</p>
         <p class="small">Costoso (cacheado): {{ mensajeCostosoComputado }}</p>
